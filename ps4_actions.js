@@ -51,7 +51,7 @@ module.exports = [
     },
     {
         regexps: [
-            new RegExp('[をの]?(トップ|top|ホーム|home|フォーム|form)'),
+            new RegExp('[をので]?(トップ|top|ホーム|home|フォーム|form)'),
         ],
         act: () => {
             ps4.sendKeys(['ps']);

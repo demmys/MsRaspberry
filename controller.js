@@ -8,7 +8,15 @@ function action(command, actions) {
             }
         });
         if (matches !== null) {
-            action.act(matches);
+            try {
+                action.act(matches);
+            } catch (err) {
+                console.error(JSON.stringify({
+                    level: 'error',
+                    time: now.toISOString(),
+                    detail: err
+                }));
+            }
             return true;
         }
     });

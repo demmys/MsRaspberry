@@ -13,6 +13,7 @@ module.exports = [
         ],
         act: () => {
             ps4.startTitle(TITLE_IDS.TORNE);
+            console.log('Command accepted. Starting torne...');
         }
     },
     {
@@ -21,6 +22,7 @@ module.exports = [
         ],
         act: () => {
             ps4.startTitle(TITLE_IDS.NETFLIX);
+            console.log('Command accepted. Starting netflix...');
         }
     },
     {
@@ -28,7 +30,9 @@ module.exports = [
             new RegExp('[でに2](.*)([とをでて]|って)([い入]れて|(入力|にゅうりょく)|[か書]いて)'),
         ],
         act: (matches) => {
-            ps4.getKeyboard().then(osk => osk.setText(matches[1])).then(osk => osk.submit());
+            let sentence = matches[1];
+            ps4.getKeyboard().then(osk => osk.setText(sentence)).then(osk => osk.submit());
+            console.log('Command accepted. Inserting the sentence "' + sentence + '"...');
         }
     },
     {
@@ -38,6 +42,7 @@ module.exports = [
         ],
         act: () => {
             ps4.turnOn();
+            console.log('Command accepted. Recovering PS4 from standby...');
         }
     },
     {
@@ -47,6 +52,7 @@ module.exports = [
         ],
         act: () => {
             ps4.turnOff();
+            console.log('Command accepted. Changing PS4 to standby...');
         }
     },
     {
@@ -55,6 +61,7 @@ module.exports = [
         ],
         act: () => {
             ps4.sendKeys(['ps']);
+            console.log('Command accepted. Sending PS key...');
         }
     },
 ];

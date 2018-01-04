@@ -1,7 +1,14 @@
 function action(command, actions) {
     actions.some(action => {
-        if (action.regexps.some(r => r.test(command))) {
-            action.act();
+        let matches = null;
+        action.regexps.some(regexp => {
+            matches = command.match(regexp);
+            if (matches !== null) {
+                return true;
+            }
+        });
+        if (matches !== null) {
+            action.act(matches);
             return true;
         }
     });
@@ -15,6 +22,9 @@ module.exports = {
     register: (db, path, key, actions) => {
         db.ref(path).on('value', changed => {
             let command = changed.child(key).val().replace(/[  ]/g, '');
+            if (command === '') {
+                return;
+            }
             logCommand(path, command);
             action(command, actions);
             db.ref(path).set({ [key]: '' });

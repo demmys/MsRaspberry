@@ -25,6 +25,14 @@ module.exports = [
     },
     {
         regexps: [
+            new RegExp('[でに2](.*)([とをでて]|って)([い入]れて|(入力|にゅうりょく)|[か書]いて)'),
+        ],
+        act: (matches) => {
+            ps4.getKeyboard().then(osk => osk.setText(matches[1])).then(osk => osk.submit());
+        }
+    },
+    {
+        regexps: [
             new RegExp('の?(電源|でんげん)を?(つけて|[い入]れて)'),
             new RegExp('を?(つけて|[い入]れて|起動|きどう|オン|on|スタート|start)', 'i'),
         ],

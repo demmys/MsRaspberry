@@ -1,0 +1,23 @@
+{
+  "name": "msraspberry",
+  "version": "1.0.0",
+  "description": "Home automation program for Ms.Raspberry",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/demmys/MsRaspberry.git"
+  },
+  "author": "Atsuki Demizu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/demmys/MsRaspberry/issues"
+  },
+  "homepage": "https://github.com/demmys/MsRaspberry#readme",
+  "dependencies": {
+    "firebase": "^4.8.1",
+    "ps4-waker": "^1.4.3"
+  }
+}

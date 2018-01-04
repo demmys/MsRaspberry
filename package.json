@@ -19,6 +19,7 @@
   "dependencies": {
     "firebase": "^4.8.1",
     "forever": "^0.15.3",
+    "initd-forever": "^0.1.8",
     "ps4-waker": "^1.4.3"
   }
 }

@@ -51,7 +51,7 @@ module.exports = [
             new RegExp('を?([け消]して|[き切]って|終了|しゅうりょう|オフ|off|スタンバイ|standby)', 'i'),
         ],
         act: () => {
-            ps4.turnOff();
+            ps4.sendKeys(['ps']).then(() => ps4.turnOff());
             console.log('Command accepted. Changing PS4 to standby...');
         }
     },

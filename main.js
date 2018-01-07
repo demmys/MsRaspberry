@@ -10,6 +10,7 @@ let ip = getLocalIpv4();
 db.ref('/raspberry').set({ ip: ip });
 
 controller.register(db, '/ps4', 'command', require('./ps4_actions.js'));
+controller.register(db, '/light', 'command', require('./light_actions.js'));
 
 console.log('Ms.Raspberry is now ready on ' + ip + '.');
 

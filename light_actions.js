@@ -1,9 +1,9 @@
 const irMagician = require('irmagician');
 
 const DATA_FILES = {
-    TOGGLE: 'data/toggle.json',
-    LIGHTEN: 'data/lighten.json',
-    DARKEN: 'data/darken.json'
+    TOGGLE: 'data/light/toggle.json',
+    LIGHTEN: 'data/light/lighten.json',
+    DARKEN: 'data/light/darken.json'
 };
 
 module.exports = [

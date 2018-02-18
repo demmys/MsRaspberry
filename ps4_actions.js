@@ -1,8 +1,13 @@
 const { Device } = require('ps4-waker');
+const irMagician = require('irmagician');
 const TITLE_IDS = {
     TORNE: 'CUSA00442',
     NETFLIX: 'CUSA02988',
     MONSTER_HUNTER_WORLD: 'CUSA06027'
+};
+const DATA_FILES = {
+    ON: 'data/remoconcent/on.json',
+    OFF: 'data/remoconcent/off.json'
 };
 
 let ps4 = new Device();
@@ -74,4 +79,17 @@ module.exports = [
             console.log('Command accepted. Sending PS key...');
         }
     },
+    {
+        regexps: [
+            new RegExp('に([切き]り[替か]えて|[変替か]えて|して)'),
+        ],
+        act: () => {
+            irMagician.write(DATA_FILES.OFF);
+            setTimeout(() => {
+                irMagician.play();
+            }, 1000);
+            ps4.turnOn();
+            console.log('Command accepted. Turning off the Remoconcent and recovering PS4 from standby...');
+        }
+    }
 ];

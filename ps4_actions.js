@@ -1,7 +1,8 @@
 const { Device } = require('ps4-waker');
 const TITLE_IDS = {
     TORNE: 'CUSA00442',
-    NETFLIX: 'CUSA02988'
+    NETFLIX: 'CUSA02988',
+    MONSTER_HUNTER_WORLD: 'CUSA06027'
 };
 
 let ps4 = new Device();
@@ -13,7 +14,7 @@ module.exports = [
         ],
         act: () => {
             ps4.startTitle(TITLE_IDS.TORNE);
-            console.log('Command accepted. Starting torne...');
+            console.log('Command accepted. Starting Torne...');
         }
     },
     {
@@ -22,7 +23,16 @@ module.exports = [
         ],
         act: () => {
             ps4.startTitle(TITLE_IDS.NETFLIX);
-            console.log('Command accepted. Starting netflix...');
+            console.log('Command accepted. Starting Netflix...');
+        }
+    },
+    {
+        regexps: [
+            new RegExp('で(モンハン|もんはん|モンスターハンター|モンスターハンター|monster hunter)(ワールド|わーるど|world|)を?(つけて|かけて|(開|ひら)いて|起動|きどう|オン|on|スタート|start)', 'i'),
+        ],
+        act: () => {
+            ps4.startTitle(TITLE_IDS.MONSTER_HUNTER_WORLD);
+            console.log('Command accepted. Starting Monster Hunter World...');
         }
     },
     {

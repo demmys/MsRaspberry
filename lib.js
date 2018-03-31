@@ -26,10 +26,6 @@ function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function exec(command) {
-    return promisify(exec);
-}
-
 function toLogString(level, message) {
     return `<${level}>[${(new Date()).toISOString()}] ${message}`;
 }
@@ -45,7 +41,7 @@ function logError(message, detail = '') {
 module.exports = {
     getLocalIpv4,
     delay,
-    exec,
     logInfo,
-    logError
+    logError,
+    execAsync: promisify(exec)
 };

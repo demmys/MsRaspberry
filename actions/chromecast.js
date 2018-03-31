@@ -1,4 +1,4 @@
-const chromecast = require('../modules/cromecast');
+const chromecast = require('../modules/chromecast');
 const ps4 = require('../modules/ps4');
 
 module.exports = [

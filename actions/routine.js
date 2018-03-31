@@ -24,6 +24,7 @@ module.exports = [
             if (!(await ps4.isStandby())) {
                 await ps4.turnOff();
             }
+        }
     },
     {
         regexps: [

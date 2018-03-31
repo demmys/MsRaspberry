@@ -2,9 +2,9 @@ const irMagician = require('irmagician');
 const { delay } = require('../lib');
 
 const DATA_FILES = {
-    TOGGLE: 'data/light/toggle.json',
-    LIGHTEN: 'data/light/lighten.json',
-    DARKEN: 'data/light/darken.json'
+    TOGGLE: 'modules/data/light/toggle.json',
+    LIGHTEN: 'modules/data/light/lighten.json',
+    DARKEN: 'modules/data/light/darken.json'
 };
 
 module.exports = {

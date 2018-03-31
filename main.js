@@ -9,11 +9,11 @@ const db = firebase.database();
 let ip = getLocalIpv4();
 db.ref('/raspberry').set({ ip });
 
-controller.register(db, '/ps4', 'command', require('./actions/ps4.js'));
-controller.register(db, '/light', 'command', require('./actions/light.js'));
-controller.register(db, '/chromecast', 'command', require('./actions/chromecast.js'));
-controller.register(db, '/kitchen_light', 'command', require('./actions/kitchen_light.js'));
-controller.register(db, '/hotwater', 'command', require('./actions/hotwater.js'));
-controller.register(db, '/routine', 'command', require('./actions/routine.js'));
+register(db, '/ps4', 'command', require('./actions/ps4.js'));
+register(db, '/light', 'command', require('./actions/light.js'));
+register(db, '/chromecast', 'command', require('./actions/chromecast.js'));
+register(db, '/kitchen_light', 'command', require('./actions/kitchen_light.js'));
+register(db, '/hotwater', 'command', require('./actions/hotwater.js'));
+register(db, '/routine', 'command', require('./actions/routine.js'));
 
 logInfo('Ms.Raspberry is now ready on ' + ip + '.');

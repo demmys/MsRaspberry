@@ -1,18 +1,22 @@
 const { logInfo, logError } = require('./lib');
 
-function action(command, actions) {
-    let act = null;
+async function action(command, actions) {
+    let target = null;
     actions.some(action => {
         action.regexps.some(regexp => {
             let matches = command.match(regexp);
             if (matches !== null) {
-                act = action.act.bind(null, matches);
+                target = action;
+                target.matches = matches;
                 return true;
             }
         });
-        return act !== null;
+        return target !== null;
     });
-    return act();
+    if (target !== null) {
+        await target.act();
+        return target.name;
+    }
 }
 
 module.exports = (db, path, key, actions) => {
@@ -21,7 +25,10 @@ module.exports = (db, path, key, actions) => {
         if (command === '') {
             return;
         }
-        action(command, actions).then(() => {
+        action(command, actions).then((title) => {
+            if (typeof(title) !== 'undefined') {
+                logInfo('Action fired: ' + title);
+            }
             db.ref(path).set({ [key]: '' });
         }).catch((err) => {
             logError('Unexpected error.', err);

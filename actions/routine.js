@@ -17,7 +17,7 @@ module.exports = [
             new RegExp('[行い]ってきます'),
         ],
         act: async () => {
-            if ((new Date()).getHours() > 17) {
+            if ((new Date()).getHours() >= 17) {
                 await light.toggle();
             }
             await hotwater.push();
@@ -31,7 +31,7 @@ module.exports = [
             new RegExp('ただいま'),
         ],
         act: async () => {
-            if ((new Date()).getHours() > 16) {
+            if ((new Date()).getHours() >= 16) {
                 await light.toggle();
             }
             await hotwater.push();

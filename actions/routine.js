@@ -8,8 +8,8 @@ module.exports = [
             new RegExp('おはよう'),
         ],
         act: async () => {
-            await ps4.startTorne();
             await hotwater.push();
+            await ps4.startTorne();
         }
     },
     {

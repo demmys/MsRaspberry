@@ -1,8 +1,9 @@
 const irMagician = require('irmagician');
+const { delay } = require('../lib');
 
 const DATA_FILES = {
-    ON: 'data/remoconcent/on.json',
-    OFF: 'data/remoconcent/off.json'
+    ON: 'modules/data/remoconcent/on.json',
+    OFF: 'modules/data/remoconcent/off.json'
 };
 
 module.exports = {

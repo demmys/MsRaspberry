@@ -1,4 +1,5 @@
 const { logInfo, logError } = require('./lib');
+const googlehome = require('./modules/googlehome');
 
 async function action(command, actions) {
     let target = null;
@@ -16,6 +17,9 @@ async function action(command, actions) {
     if (target !== null) {
         await target.act();
         return target.name;
+    } else {
+        await googlehome.notify(`あれすいません、「${command}」って何するんでしたっけ?`);
+        logError('Undefined command: ', command);
     }
 }
 
@@ -32,6 +36,7 @@ module.exports = (db, path, key, actions) => {
             db.ref(path).set({ [key]: '' });
         }).catch((err) => {
             logError('Unexpected error.', err);
+            googlehome.notify('む、ごめんなさいなんかエラーみたいです');
         });
     });
 };

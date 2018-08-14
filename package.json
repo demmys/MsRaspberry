@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/demmys/MsRaspberry#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "firebase": "^4.8.1",
     "forever": "^0.15.3",
     "google-home-notifier": "^1.2.0",

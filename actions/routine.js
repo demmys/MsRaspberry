@@ -1,6 +1,7 @@
 const hotwater = require('../modules/hotwater');
 const ps4 = require('../modules/ps4');
 const light = require('../modules/light');
+const wionode = require('../modules/wionode');
 
 module.exports = [
     {
@@ -8,7 +9,14 @@ module.exports = [
             new RegExp('おはよう'),
         ],
         act: async () => {
-            await hotwater.push();
+            let lux = await wionode.getDigitalLightLux();
+            let temperature = await wionode.getTempHumProTemperature();
+            if (temperature < 20) {
+                await hotwater.push();
+            }
+            if (lux < 100) {
+                await light.toggle();
+            }
             await ps4.startTorne();
         }
     },
@@ -17,10 +25,14 @@ module.exports = [
             new RegExp('[行い]ってきます'),
         ],
         act: async () => {
-            if ((new Date()).getHours() >= 17) {
+            let lux = await wionode.getDigitalLightLux();
+            let temperature = await wionode.getTempHumProTemperature();
+            if (temperature < 20) {
+                await hotwater.push();
+            }
+            if (lux > 200) {
                 await light.toggle();
             }
-            await hotwater.push();
             if (!(await ps4.isStandby())) {
                 await ps4.turnOff();
             }
@@ -31,11 +43,15 @@ module.exports = [
             new RegExp('ただいま'),
         ],
         act: async () => {
-            if ((new Date()).getHours() >= 16) {
+            let lux = await wionode.getDigitalLightLux();
+            let temperature = await wionode.getTempHumProTemperature();
+            if (temperature < 20) {
+                await hotwater.push();
+            }
+            if (lux < 100) {
                 await light.toggle();
             }
-            await hotwater.push();
-            await ps4.startNetflix();
+            await ps4.startTorne();
         }
     },
     {
@@ -43,8 +59,14 @@ module.exports = [
             new RegExp('おやすみ'),
         ],
         act: async () => {
-            await light.toggle();
-            await hotwater.push();
+            let lux = await wionode.getDigitalLightLux();
+            let temperature = await wionode.getTempHumProTemperature();
+            if (temperature < 20) {
+                await hotwater.push();
+            }
+            if (lux > 200) {
+                await light.toggle();
+            }
             if (!(await ps4.isStandby())) {
                 await ps4.turnOff();
             }

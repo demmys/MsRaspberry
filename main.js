@@ -3,7 +3,7 @@ const config = require('./config');
 const register = require('./register');
 const { getLocalIpv4, logInfo } = require('./lib');
 
-firebase.initializeApp(config);
+firebase.initializeApp(config.firebase);
 const db = firebase.database();
 
 let ip = getLocalIpv4();

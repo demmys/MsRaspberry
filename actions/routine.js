@@ -9,15 +9,19 @@ module.exports = [
             new RegExp('おはよう'),
         ],
         act: async () => {
-            let lux = await wionode.getDigitalLightLux();
-            let temperature = await wionode.getTempHumProTemperature();
-            if (temperature < 20) {
-                await hotwater.push();
-            }
+            let [lux, temperature] = await Promise.all([
+                wionode.getDigitalLightLux(),
+                wionode.getTempHumProTemperature()
+            ]);
+            let actions = [];
             if (lux < 100) {
-                await light.toggle();
+                actions.push(light.toggle());
             }
-            await ps4.startTorne();
+            if (temperature < 20) {
+                actions.push(hotwater.push());
+            }
+            actions.push(ps4.startTorne());
+            await Promise.all(actions);
         }
     },
     {
@@ -25,17 +29,22 @@ module.exports = [
             new RegExp('[行い]ってきます'),
         ],
         act: async () => {
-            let lux = await wionode.getDigitalLightLux();
-            let temperature = await wionode.getTempHumProTemperature();
-            if (temperature < 20) {
-                await hotwater.push();
-            }
+            let [lux, temperature, ps4IsStandby] = await Promise.all([
+                wionode.getDigitalLightLux(),
+                wionode.getTempHumProTemperature(),
+                ps4.isStandby()
+            ]);
+            let actions = [];
             if (lux > 200) {
-                await light.toggle();
+                actions.push(light.toggle());
             }
-            if (!(await ps4.isStandby())) {
-                await ps4.turnOff();
+            if (temperature < 20) {
+                actions.push(hotwater.push());
             }
+            if (!ps4IsStandby) {
+                actions.push(ps4.turnOff());
+            }
+            await Promise.all(actions);
         }
     },
     {
@@ -43,15 +52,19 @@ module.exports = [
             new RegExp('ただいま'),
         ],
         act: async () => {
-            let lux = await wionode.getDigitalLightLux();
-            let temperature = await wionode.getTempHumProTemperature();
-            if (temperature < 20) {
-                await hotwater.push();
-            }
+            let [lux, temperature] = await Promise.all([
+                wionode.getDigitalLightLux(),
+                wionode.getTempHumProTemperature()
+            ]);
+            let actions = [];
             if (lux < 100) {
-                await light.toggle();
+                actions.push(light.toggle());
             }
-            await ps4.startTorne();
+            if (temperature < 20) {
+                actions.push(hotwater.push());
+            }
+            actions.push(ps4.startTorne());
+            await Promise.all(actions);
         }
     },
     {
@@ -59,17 +72,22 @@ module.exports = [
             new RegExp('おやすみ'),
         ],
         act: async () => {
-            let lux = await wionode.getDigitalLightLux();
-            let temperature = await wionode.getTempHumProTemperature();
+            let [lux, temperature, ps4IsStandby] = await Promise.all([
+                wionode.getDigitalLightLux(),
+                wionode.getTempHumProTemperature(),
+                ps4.isStandby()
+            ]);
+            let actions = [];
             if (temperature < 20) {
-                await hotwater.push();
+                actions.push(hotwater.push());
             }
             if (lux > 200) {
-                await light.toggle();
+                actions.push(light.toggle());
             }
-            if (!(await ps4.isStandby())) {
-                await ps4.turnOff();
+            if (!ps4IsStandby) {
+                actions.push(ps4.turnOff());
             }
+            await Promise.all(actions);
         }
     }
 ];

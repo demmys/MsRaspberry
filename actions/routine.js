@@ -35,7 +35,7 @@ module.exports = [
                 ps4.isStandby()
             ]);
             let actions = [];
-            if (lux > 200) {
+            if (lux > 150) {
                 actions.push(light.toggle());
             }
             if (temperature < 20) {
@@ -81,7 +81,7 @@ module.exports = [
             if (temperature < 20) {
                 actions.push(hotwater.push());
             }
-            if (lux > 200) {
+            if (lux > 150) {
                 actions.push(light.toggle());
             }
             if (!ps4IsStandby) {

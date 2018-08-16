@@ -2,6 +2,7 @@ const hotwater = require('../modules/hotwater');
 const ps4 = require('../modules/ps4');
 const light = require('../modules/light');
 const wionode = require('../modules/wionode');
+const { delay } = require('../lib');
 
 module.exports = [
     {
@@ -45,6 +46,11 @@ module.exports = [
                 actions.push(ps4.turnOff());
             }
             await Promise.all(actions);
+            await delay(1000);
+            let changedLux = await wionode.getDigitalLightLux();
+            if (changedLux >= lux) {
+                await light.toggle()
+            }
         }
     },
     {
@@ -88,6 +94,11 @@ module.exports = [
                 actions.push(ps4.turnOff());
             }
             await Promise.all(actions);
+            await delay(1000);
+            let changedLux = await wionode.getDigitalLightLux();
+            if (changedLux >= lux) {
+                await light.toggle()
+            }
         }
     }
 ];
